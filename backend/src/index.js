@@ -1,10 +1,15 @@
 const express = require("express");
+const connectDB = require("./database/db");
+require("dotenv").config();
+
+connectDB();
+
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 8000;
 
 app.use(express.json());
 
-app.use("/api/questions", require("./routes/questions"));
+app.use("/api/blogs", require("./routes/blogs"));
 
 app.listen(port, () => {
   console.log(`IX blogging app listening on port ${port}`);
