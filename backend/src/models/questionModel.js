@@ -43,4 +43,26 @@ const questionSchema = new mongoose.Schema(
     }
 );
 
+// Add a toJSON method to the schema to control the output of blog instances
+questionSchema.method("toJSON", function () {
+  const { __v, _id, categoryIds, ...object } = this.toObject();
+  object.id = _id;
+
+  object.categories = categoryIds.map((category) => {
+    return {
+      id: category._id,
+      title: category.title,
+      description: category.description,
+      color: category.color,
+    };
+  });
+
+  // Ensure author is included in the returned object
+  if (this.author) {
+    object.author = this.author;
+  }
+
+  return object;
+});
+
 module.exports = mongoose.model("Question", questionSchema);
