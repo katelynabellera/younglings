@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema(
     {
-        questionID: {
+        questionId: {
             type: String,
             required: true,
         },
@@ -13,6 +13,7 @@ const questionSchema = new mongoose.Schema(
         difficulty: {
             type: String,
             required: true,
+            // Pred-defined allowed values.
             enum: ['easy', 'medium', 'hard'],
         },
         question: {
